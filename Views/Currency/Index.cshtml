@@ -1,0 +1,27 @@
+﻿@model CurrencyConverterViewModel
+
+<h2>Currency Converter</h2>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label>Amount:</label>
+        <input asp-for="Amount" />
+    </div>
+
+    <div>
+        <label>From:</label>
+        <select asp-for="FromCurrency" asp-items="@(new SelectList(Model.AvailableRates.Keys))"></select>
+    </div>
+
+    <div>
+        <label>To:</label>
+        <select asp-for="ToCurrency" asp-items="@(new SelectList(Model.AvailableRates.Keys))"></select>
+    </div>
+
+    <button type="submit">Convert</button>
+</form>
+
+@if (Model.ConvertedAmount > 0)
+{
+    <p>@Model.Amount @Model.FromCurrency = <strong>@Model.ConvertedAmount @Model.ToCurrency</strong></p>
+}
